@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>Register</h1>
+	{%if messages%}
+		{%for message in messages%}
+			{% if message.tags == "error" %}
+    			<p style="color: red">{{message}}</p>
+    		{% endif %}	
+		{%endfor%}
+	{%endif%}
+	<form action = "/register" method = "POST">
+	{% csrf_token %}
+		<input type="text" name="name" placeholder = "Enter your name!" ><br> <!-- #required is true -->
+		<input type="text" name="alias" placeholder = "Enter your alias!"><br>
+		<input type="text" name="email_address" placeholder = "Enter your email address!" ><br>
+		<input type="text" name="password" placeholder = "Enter your password!" ><br>
+		<input type="text" name="c_password" placeholder = "Confirm your password!" ><br>
+		Date of Birth:	<input type="date" name="dob" required = "True"> <br>
+		<input type="submit" value="Register">
+	</form>
+	{%if messages%}
+		{%for message in messages%}
+			{% if message.tags == "success" %}
+    			<p style="color: green">{{message}}</p>
+    		{% endif %}	
+		{%endfor%}
+	{%endif%}
+
+	<h1>Log in</h1>
+	<form action = "/login" method = "POST">
+	{% csrf_token %}
+		<input type="text" name="email_address" placeholder = "Enter your email!" ><br> <!-- #required is true -->
+		<input type="text" name="password" placeholder = "Enter your password!"><br>
+		<input type="submit" value="Log In">
+	</form>
+</body>
+</html>

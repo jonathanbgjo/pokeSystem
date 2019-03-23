@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>dashboard</title>
+	</head>
+	<body>
+	<p> <b>WELCOME, {{request.session.name}}</b> <a href="/logout">Logout</a></p>
+	<p> {%if pokedMe%}
+			<b>{{pokedMe|length}}</b> 
+		{%else%}
+			0
+		{%endif%} people poked you! </p>
+
+	{%for x in realcountMe%}
+	<p>{{x}}</p>
+	{%endfor%}
+	 
+
+	<table>
+	<tr>
+		<th>Name</th>
+		<th>Alias</th>
+		<th>Email Address</th>
+		<th>Poke History</th>
+		<th>Action</th>
+	</tr>
+	<br><br>
+	<p>People you may want to poke ;)</p>
+	{%for user in otherUsers%}
+	<tr>
+		<th>{{user.name}}</th>
+		<th>{{user.alias}}</th>
+		<th>{{user.email_address}}</th>
+		<th>{{user.got.all.count}}</th>
+		<th><form action= "/poke/givepoke/{{user.id}}" method = "POST"> {% csrf_token %}<input type="submit" value="Poke!"></form></th>
+	</tr>
+	{%endfor%} 
+	</table>
+	</body>
+</html>
